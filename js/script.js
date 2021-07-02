@@ -25,7 +25,15 @@ const mostrarData = (d) => {
   arti.forEach(function (elemento) {
     elemento.addEventListener("click", function () {
       let album = elemento.firstChild.parentNode.childNodes[3].textContent;
-      console.log(album);
+      MostrarAlbum(album);
+      //console.log(album);
     });
   });
+};
+
+const MostrarAlbum = (album) => {
+  fetch(`http://localhost:3000/api/v1/album/${album}`)
+    .then((response) => response.json())
+    // .then((data) => data.map(mostrarData));
+    .then((data) => console.log(data));
 };
