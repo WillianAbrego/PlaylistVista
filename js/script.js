@@ -5,7 +5,7 @@ fetch("http://localhost:3000/api/v1/artista")
 const mostrarData = (d) => {
   document.getElementById(
     "contenedor"
-  ).innerHTML += `<article class="full-box tile artista">
+  ).innerHTML += `<article class="full-box tile artista" >
   <div class="full-box tile-title text-center text-titles text-uppercase">
       ${d.nombre}
   </div>
@@ -20,12 +20,15 @@ const mostrarData = (d) => {
       
   </div>
 </article>`;
-  console.log(d.id);
+
+  //console.log(d.id);
   let arti = document.querySelectorAll(".artista");
   arti.forEach(function (elemento) {
     elemento.addEventListener("click", function () {
       let album = elemento.firstChild.parentNode.childNodes[3].textContent;
+      document.getElementById("contenedor").innerHTML = "";
       MostrarAlbum(album);
+
       //console.log(album);
     });
   });
@@ -35,5 +38,36 @@ const MostrarAlbum = (album) => {
   fetch(`http://localhost:3000/api/v1/album/${album}`)
     .then((response) => response.json())
     // .then((data) => data.map(mostrarData));
-    .then((data) => console.log(data));
+    .then((data) => data.map(mostrarData2));
+
+  const mostrarData2 = (da) => {
+    document.getElementById(
+      "contenedor"
+    ).innerHTML += `<article class="full-box tile album">
+      <div class="full-box tile-title text-center text-titles text-uppercase">
+          ${da.nombre_Album}
+      </div>
+      <div class="hidden">${da.id}</div>
+    
+    </div>
+      <div class="full-box tile-icon text-center">
+          <i class="zmdi zmdi-account"></i>
+      </div>
+      <div class="full-box tile-number text-titles">
+          <p class="full-box">albunes</p>
+          
+      </div>
+    </article>`;
+
+    //    console.log(d);
+    let arti = document.querySelectorAll(".album");
+    arti.forEach(function (elemento) {
+      elemento.addEventListener("click", function () {
+        let album = elemento.firstChild.parentNode.childNodes[3].textContent;
+
+        //MostrarAlbum(album);
+        console.log(album);
+      });
+    });
+  };
 };
