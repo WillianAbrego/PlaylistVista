@@ -63,7 +63,7 @@ const MostrarAlbum = (album) => {
      
     </article>`;
 
-    console.log(da);
+    //console.log(da);
     let arti = document.querySelectorAll(".album");
     arti.forEach(function (elemento) {
       elemento.addEventListener("click", function () {
@@ -139,7 +139,27 @@ fetch("http://localhost:3000/api/v1/playlist")
 const ShowPlaylist = (play) => {
   console.log(play);
   document.getElementById("play").innerHTML += `<li>
-  <a href="#"><i class="zmdi zmdi-book zmdi-hc-fw"></i> ${play.nombre}</a>
-  <div class="hidden">${play.id}</div>
+  <a href="#" class="playlist"><i class="zmdi zmdi-book zmdi-hc-fw"></i> ${play.nombre}
+  <div class="hidden">${play.id}</div></a>
+  
 </li>`;
+  let playli = document.querySelectorAll(".playlist");
+  playli.forEach(function (event) {
+    event.addEventListener("click", function () {
+      let pl = event.childNodes[2].innerText;
+      // MostrarCancion(album);
+      // document.getElementById("contenedor").innerHTML = "";
+      console.log(pl);
+    });
+  });
 };
+//funcionalidad de dar click en playlist
+// let play = document.querySelectorAll(".playlist");
+// play.forEach(function (elemento) {
+//   elemento.addEventListener("click", function () {
+//     // let album = elemento.firstChild.parentNode.childNodes[3].textContent;
+//     // MostrarCancion(album);
+//     // document.getElementById("contenedor").innerHTML = "";
+//     console.log(play);
+//   });
+// });
