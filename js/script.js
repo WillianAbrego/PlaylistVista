@@ -148,37 +148,30 @@ const ShowPlaylist = (play) => {
     event.addEventListener("click", function () {
       let pl = event.childNodes[2].innerText;
       MostrarDetalleCancion(pl);
-      document.getElementById("ListaDeCanciones").innerHTML += "";
+      document.getElementById("ListaDeCanciones").innerHTML = "";
+
       // document.getElementById("contenedor").innerHTML = "";
       //console.log(pl);
     });
   });
 };
+
+//comienza listar canciones al dar click en la playlist
 const MostrarDetalleCancion = (detalle) => {
   fetch(`http://localhost:3000/api/v1/playlistdetalle/${detalle}`)
     .then((response) => response.json())
-    // .then((data) => data.map(ShowPlaylist));
     .then((data) => data.map(DetalleCancion));
-  //.then((data) => console.log(data));
 
   const DetalleCancion = (da) => {
-    document.getElementById("ListaDeCanciones").innerHTML += "";
+    document.getElementById("cabecera").innerHTML = `<div class="page-header">
+      <h1 class="text-titles">${da.nombre_playlist}</h1>
+    </div>
+  `;
     document.getElementById("ListaDeCanciones").innerHTML += `<li>
-    							<a href="home.html">
-    								<i class="zmdi zmdi-collection-music  zmdi-hc-fw"></i> <strong>Autor--</strong>
+    							<a href="#">
+    								<i class="zmdi zmdi-collection-music  zmdi-hc-fw"></i> <strong>${da.nombre} --</strong>
     								 <i>${da.nombre_cancion}  </i>
     							</a>
     						</li>`;
   };
-
-  console.log();
 };
-
-// ListaDeCanciones
-
-// <li>
-// 							<a href="home.html">
-// 								<i class="zmdi zmdi-collection-music  zmdi-hc-fw"></i> <strong>Autor--</strong>
-// 								 <i>Cancion </i>
-// 							</a>
-// 						</li>
