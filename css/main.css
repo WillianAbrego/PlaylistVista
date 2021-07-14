@@ -226,6 +226,10 @@ html {
   border-left: 3px solid #ff5722;
   color: #ff5722;
 }
+.dashboard-sideBar-Menu > li > a:hover {
+  border-left: 3px solid #ff5722;
+  color: #ff5722;
+}
 /*contentPage*/
 .dashboard-contentPage {
   right: 0;
@@ -376,12 +380,7 @@ html {
   color: rgba(43, 174, 168, 0.4);
   transition: all 0.3s ease-in-out;
 }
-.tile-number {
-  right: 0;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-}
+
 .tile-number > p {
   font-size: 70px;
 }
@@ -502,8 +501,6 @@ html {
     height: 60px;
     left: 50%;
     margin-left: -30px;
-    -webkit-transform: translateZ(0);
-    -webkit-backface-visibility: hidden;
   }
   .cd-timeline-img img {
     width: 60px;
