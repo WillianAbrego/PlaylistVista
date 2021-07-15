@@ -112,7 +112,7 @@ const MostrarCancion = (cancion) => {
     arti.forEach(function (elemento) {
       elemento.addEventListener("click", function () {
         let album = elemento.firstChild.parentNode.childNodes[3].textContent;
-
+        document.getElementById("contenedor").innerHTML = "";
         //MostrarAlbum(album);
         //console.log(album);
       });
@@ -147,8 +147,22 @@ const ShowPlaylist = (play) => {
   playli.forEach(function (event) {
     event.addEventListener("click", function () {
       let pl = event.childNodes[2].innerText;
+      document.getElementById("contenedor").innerHTML = "";
+      document.getElementById(
+        "contenedor"
+      ).innerHTML += `<section class="full-box cover">
+    <div class="full-box dashboard-sideBar-bg btn-menu-dashboard"></div>
+    <div class="full-box dashboard-sideBar-centro">
+      <!--SideBar Title -->
+      
+      <!-- SideBar Menu -->
+      <ul class="list-unstyled full-box dashboard-sideBar-Menu" id="ListaDeCanciones">  
+      </ul>
+    </div>
+  </section>`;
       MostrarDetalleCancion(pl);
-      document.getElementById("ListaDeCanciones").innerHTML = "";
+
+      //document.getElementById("ListaDeCanciones").innerHTML = "";
 
       // document.getElementById("contenedor").innerHTML = "";
       //console.log(pl);
@@ -167,6 +181,7 @@ const MostrarDetalleCancion = (detalle) => {
       <h1 class="text-titles">${da.nombre_playlist}</h1>
     </div>
   `;
+
     document.getElementById("ListaDeCanciones").innerHTML += `<li>
     							<a href="#">
     								<i class="zmdi zmdi-collection-music  zmdi-hc-fw"></i> <strong>${da.nombre} --</strong>
