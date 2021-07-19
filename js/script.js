@@ -101,7 +101,7 @@ const MostrarCancion = (cancion) => {
           <small>autor</small>
           </div>
       <div>
-          <p>kakkakakakak</p>
+          <p></p>
 
       </div>
 
@@ -179,17 +179,33 @@ const MostrarDetalleCancion = (detalle) => {
   const DetalleCancion = (da) => {
     document.getElementById("cabecera").innerHTML = `<div class="page-header">
       <h1 class="text-titles">${da.nombre_playlist}</h1>
-    </div>
-  `;
-
+    </div>`;
     document.getElementById("ListaDeCanciones").innerHTML += `<li>
-    							<a href="#">
+    							<a href="#" class="listac">
     								<i class="zmdi zmdi-collection-music  zmdi-hc-fw"></i> <strong>${da.nombre} --</strong>
-    								 <i>${da.nombre_cancion}  </i>
+    								 <i>${da.nombre_cancion}</i><div class="hidden">${da.url}</div>
     							</a>
     						</li>`;
+    let arti = document.querySelectorAll(".listac");
+    arti.forEach(function (elemento) {
+      elemento.addEventListener("click", function () {
+        let lista = elemento.childNodes[6].innerText;
+        document.getElementById("contenedor").innerHTML = "";
+        mostrarVideo(lista);
+        //console.log(lista);
+      });
+    });
   };
 };
+
+const mostrarVideo = (vi) => {
+  console.log(vi);
+  document.getElementById("contenedor").innerHTML += `
+    <div id="ytplayer">
+    </div>`;
+  onYouTubePlayerAPIReady(vi);
+};
+
 //script api Youtube
 var tag = document.createElement("script");
 tag.src = "https://www.youtube.com/player_api";
@@ -197,10 +213,10 @@ var firstScriptTag = document.getElementsByTagName("script")[0];
 firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
 var player;
-function onYouTubePlayerAPIReady() {
+function onYouTubePlayerAPIReady(urlvideo) {
   player = new YT.Player("ytplayer", {
     height: "480px",
     width: "100%",
-    videoId: "DbUCSY-Dt-0",
+    videoId: urlvideo,
   });
 }
