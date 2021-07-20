@@ -130,6 +130,7 @@ const ShowUser = (user) => {
   document.getElementById(
     "user"
   ).innerHTML += `${user[0].nombre} <div class="hidden">${user[0].id}</div>`;
+  listarFavoritos(user[0].id);
 };
 //comienza playlist nombre y id
 fetch("http://localhost:3000/api/v1/playlist")
@@ -169,7 +170,21 @@ const ShowPlaylist = (play) => {
     });
   });
 };
+//listar favoritos del usuario admin
 
+const listarFavoritos = (iduser) => {
+  fetch(`http://localhost:3000/api/v1/favorito/${iduser}`)
+    .then((response) => response.json())
+    .then((data) => data.map(ShowFavList));
+
+  const ShowFavList = (fav) => {
+    console.log(fav);
+    document.getElementById("favoritos").innerHTML += `<li>
+  <a href="#" class="listac"><i class="zmdi zmdi-book zmdi-hc-fw"></i> ${fav.nombre_cancion}
+  <div class="hidden">${fav.url}</div></a>
+</li>`;
+  };
+};
 //comienza listar canciones al dar click en la playlist
 const MostrarDetalleCancion = (detalle) => {
   fetch(`http://localhost:3000/api/v1/playlistdetalle/${detalle}`)
@@ -204,6 +219,20 @@ const mostrarVideo = (vi) => {
     <div id="ytplayer">
     </div>`;
   onYouTubePlayerAPIReady(vi);
+};
+
+//comienza listar usuarios
+fetch("http://localhost:3000/api/v1/user")
+  .then((response) => response.json())
+  .then((data) => data.map(ShowUserList));
+
+const ShowUserList = (user) => {
+  console.log(user);
+  document.getElementById("users").innerHTML += `<li>
+  <a href="#" class="userlist"><i class="zmdi zmdi-book zmdi-hc-fw"></i> ${user.nombre}
+  <div class="hidden">${user.id}</div></a>
+  
+</li>`;
 };
 
 //script api Youtube
